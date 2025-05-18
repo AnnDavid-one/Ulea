@@ -1,0 +1,55 @@
+
+
+// The error in your code { currentUser.noOfPost < 1 ? is occurring because currentUser.noOfPost is coming 
+// from params.noOfPost, which is a string type (URL parameters are always strings), but you're
+//  trying to compare it with a number (1).
+
+//  **Solution 1: Convert to Number**
+// typescript
+
+// { Number(currentUser.noOfPost) < 1 ? (
+//   <NoPostsFound />
+// ) : (
+//   <FlatList ... />
+// )}
+
+// OR    noOfPost: Number(params.noOfPost) || 0,
+// best solution :  noOfPost: parseInt(String(params.noOfPost)) || 0,
+
+
+// **Additional Improvements:**
+
+// Add type safety for your user object:
+
+// **type** **UserProfile** = {
+//   userName: string;
+//   bio: string;
+//   avatar: string | number;
+//   noOfPost: number;
+//   followers: number;
+//   following: number;
+//   id: string;
+// };
+
+
+// now use the type in your state:
+
+
+// const [currentUser, setCurrentUser] = useState<UserProfile>({
+//   // ... initialized values
+// });
+
+// // 
+
+// export const POSTS = [
+//   {
+//     id: "1",
+//     authorName: "John Foster",
+//     userId: "user1",
+//   **avatar: require("../assets/pictures/  pic1.jpg"), // For direct usage**
+//     **  avatarUri: "pic1.jpg", // For navigation params**
+//     // ... rest of properties
+//   },
+//   // ... other posts
+// ];
+
