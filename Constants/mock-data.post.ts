@@ -12,7 +12,7 @@ export const POSTS =[
         authorName: "John Foster",
         userId: "user1", // Add unique user ID
         avatar: require("../assets/pictures/pic1.jpg"),
-        caption: "Beautiful day at the beach!",
+        caption: "Love the sea, it sees me!",
         followers: 342,
         following: 287,
         bio: "Photographer | Travel enthusiast",
@@ -28,7 +28,7 @@ export const POSTS =[
         authorName:"Marlin Jae",
         userId: "user2", // Add unique user ID
         avatar: require("../assets/pictures/pic2.jpg"),
-        caption:"This is the way to catch an Avanlanche",
+        caption:"Spend every moment with those you love and care about.",
         followers: 342,
         following: 287,
         bio: "Photographer | Travel enthusiast",
@@ -42,7 +42,7 @@ export const POSTS =[
         authorName:"Rebecker Harness",
         userId: "user1", // Add unique user ID
         avatar: require("../assets/pictures/pic3.jpg"),
-        caption:"This belongs to Mr. Smith Wilson",
+        caption:"Me trying to understand expo docs, like do I have to read the long text.",
         followers: 112,
         following: 0,
         bio: "Photographer | Travel enthusiast",
@@ -58,7 +58,7 @@ export const POSTS =[
     
          userId: "user4", // Add unique user ID
         avatar: require("../assets/pictures/myPic.jpg"),
-        caption:"Sir Joshua has some fishes in the rriver",
+        caption:"Oh well, just coming out from the office guy, made my first build on Friday usiing ead build",
         followers: 342,
         following: 287,
         bio: "Programmer | Frontend Developer",
@@ -73,7 +73,7 @@ export const POSTS =[
          userId: "user5", // Add unique user ID
 
         avatar: require("../assets/pictures/pic5.jpg"),
-        caption:"Ride the waves untill hit by a monster",
+        caption:"Ride the waves, fear no limits... be free, be real, be cool",
         followers: 32,
         following: 27,
         bio: "Writer | Travel enthusiast",

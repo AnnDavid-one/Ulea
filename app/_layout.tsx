@@ -1,10 +1,10 @@
 import { StackActions } from "@react-navigation/native";
 import { SplashScreen, Stack } from "expo-router";
-import { ScrollView, StatusBar } from "react-native";
+import {  StatusBar } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { useFonts} from "expo-font"
 import { useCallback } from "react";
-
+import { AuthProvider } from "../Services/AuthContext";
 // SplashScreen.preventAutoHideAsync();
 
 
@@ -21,18 +21,21 @@ export default function RootLayout() {
 // }, [fontsLoaded])
 
   return (
-      <SafeAreaProvider>
-        <StatusBar backgroundColor={"black"} />
-        {/* <SafeAreaView style={{flex:1, backgroundColor:"black"}} onLayout={onLayoutRootView}> */}
-        <SafeAreaView style={{flex:1, backgroundColor:"black"}} >
-    
-       <Stack 
-        screenOptions={{headerShown:false}}
-        /> 
-        </SafeAreaView>
-      </SafeAreaProvider>
+    <AuthProvider>
+
+          <SafeAreaProvider>
+            <StatusBar backgroundColor={"black"} />
+            {/* <SafeAreaView style={{flex:1, backgroundColor:"black"}} onLayout={onLayoutRootView}> */}
+            <SafeAreaView style={{flex:1, backgroundColor:"black"}} >
+        
+          <Stack 
+            screenOptions={{headerShown:false}}
+            /> 
+            </SafeAreaView>
+          </SafeAreaProvider>
   
 
+        </AuthProvider>
   )
 }
 

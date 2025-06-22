@@ -6,6 +6,7 @@ import { COLORS } from '@/Constants/theme';
 import { Image } from 'expo-image';
 import { profilePost } from '@/Constants/mock-data-profilePost';
 import User from '../components/users';
+import { router } from 'expo-router';
 // import ProfilePost from '../components/profilePost';
 
 
@@ -83,7 +84,7 @@ const renderPostItem = ({ item }: {item:Post}) =>(
 
             </View>
             <View style={styles.headerRight}>
-              <TouchableOpacity style={styles.headerIcon} onPress={() =>signOut()}> 
+              <TouchableOpacity style={styles.headerIcon} onPress={() => router.replace("/(auth)/SignIn")}> 
                   <Ionicons name="log-in-outline" size={24} color={COLORS.white}  />
               </TouchableOpacity>
 

@@ -1,35 +1,18 @@
-// import { Redirect, Stack } from "expo-router";
-// import { StatusBar } from "expo-status-bar";
+// app/(auth)/_layout.tsx (only if you need auth-specific settings)
+import { Stack } from 'expo-router';
 
-// // import { Loader } from "../../components";
-// // import { useGlobalContext } from "../../context/GlobalProvider";
-
-// const AuthLayout = () => {
-//   // const { loading, isLogged } = useGlobalContext();
-
-//   if (!loading && isLogged) return <Redirect href="/home" />;
-
-//   return (
-//     <>
-//       <Stack>
-//         <Stack.Screen
-//           name="sign-in"
-//           options={{
-//             headerShown: false,
-//           }}
-//         />
-//         <Stack.Screen
-//           name="sign-up"
-//           options={{
-//             headerShown: false,
-//           }}
-//         />
-//       </Stack>
-
-//       <Loader isLoading={loading} />
-//       <StatusBar backgroundColor="#161622" style="light" />
-//     </>
-//   );
-// };
-
-// export default AuthLayout;
+export default function AuthLayout() {
+  return (
+    <Stack
+      screenOptions={{
+        animation: 'slide_from_right', // Different animation for auth flows
+        animationDuration:2,
+        headerShown:false,
+      }}
+    >
+      <Stack.Screen name="signIn" />
+      <Stack.Screen name="signUp" />
+      <Stack.Screen name="forgotPassword" />
+    </Stack>
+  );
+}

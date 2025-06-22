@@ -209,9 +209,11 @@ marginBottom:6,
 },
 
 captionContainer: {
-  flexDirection:"row",
+  flexDirection:"column",
   flexWrap:"wrap",
   marginBottom:6,
+  width:width,
+  
 
 },
 captionUsername:{
@@ -223,8 +225,11 @@ captionUsername:{
 
 captionText: {
   fontSize:14,
+  width:"97%",
   color:COLORS.white,
   flex:1,
+  flexWrap:"wrap",
+  marginVertical:5,
 },
 
 commentsText: {

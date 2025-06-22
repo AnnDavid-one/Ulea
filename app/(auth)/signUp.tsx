@@ -1,26 +1,48 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, CheckBox } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { styles } from '../styles/signInPage';
+import { register } from '../../Services/authService';
 
+const SignUpScreen = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [displayName, setDisplayName] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
+  const handleSignUp = async () => {
+    if (!email || !password || !displayName) {
+      Alert.alert('Error', 'Please fill all fields');
+      return;
+    }
 
-const LoginScreen = () => {
+        setLoading(true);
+        const { user, error } = await register(email, password, displayName);
+        setLoading(false);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
-
-  const handleLogin = () => {
-    // TODO: Handle login logic
-    console.log('Logging in with', email, password);
-  };
+              if (error) {
+          Alert.alert('Error', error);
+        } else if (user) {
+          router.replace('/(auth)/profileSetup');
+        }
+   };
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>LOGIN</Text>
+        <Text style={styles.title}>SIGN UP</Text>
+
+        <View style={styles.inputWrapper}>
+          <FontAwesome name="user" size={20} color="#999" style={styles.icon} />
+          <TextInput
+            style={styles.input}
+            placeholder="Full Name"
+            value={displayName}
+            onChangeText={setDisplayName}
+            autoCapitalize="words"
+          />
+        </View>
 
         <View style={styles.inputWrapper}>
           <FontAwesome name="envelope" size={20} color="#999" style={styles.icon} />
@@ -30,6 +52,7 @@ const LoginScreen = () => {
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
+            autoCapitalize="none"
           />
         </View>
 
@@ -44,16 +67,17 @@ const LoginScreen = () => {
           />
         </View>
 
-        <View style={styles.checkboxContainer}>
-          {/* <CheckBox value={rememberMe} onValueChange={setRememberMe} /> */}
-          <Text style={styles.checkboxLabel}>Remember me</Text>
-        </View>
-
-        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-          <Text style={styles.loginButtonText}>LOGIN</Text>
+        <TouchableOpacity 
+          style={styles.loginButton} 
+          onPress={handleSignUp}
+          disabled={loading}
+        >
+          <Text style={styles.loginButtonText}>
+            {loading ? 'CREATING ACCOUNT...' : 'SIGN UP'}
+          </Text>
         </TouchableOpacity>
 
-        <Text style={styles.orText}>Or login with</Text>
+        <Text style={styles.orText}>Or sign up with</Text>
 
         <View style={styles.socialButtons}>
           <TouchableOpacity style={styles.socialButton}>
@@ -67,18 +91,19 @@ const LoginScreen = () => {
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.signupText}>
-          Not a member? 
-              <Link href="/(auth)/signUp" >
-           <TouchableOpacity>
-           <Text style={styles.signupLink} >Sign up now</Text>
-              
+        <View style={styles.signupTextContainer}>
+          <Text style={styles.signupText}>
+            Already have an account?{' '}
+          </Text>
+          <Link href="/(auth)/SignIn" asChild>
+            <TouchableOpacity>
+              <Text style={styles.signupLink}>Sign in</Text>
             </TouchableOpacity>
-              </Link>
-        </Text>
+          </Link>
+        </View>
       </View>
     </View>
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;

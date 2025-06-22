@@ -1,6 +1,6 @@
 import { Text, Image, View, TouchableOpacity, ScrollView, FlatList, TextInput, } from "react-native";
 import { styles } from "../styles/feed.styles";
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/Constants/theme";
 import { STORIES } from "@/Constants/mock-data";
@@ -11,7 +11,6 @@ import { POSTS } from "@/Constants/mock-data.post";
 import Post from "../components/post";
 import { useState } from "react";
 import SearchIcon from "../components/searchIcon";
-
 
 
 
@@ -37,7 +36,7 @@ const handleDeletePost = (postId:string) => {
         {/* HEADER */}
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Ulea</Text>
-          <TouchableOpacity onPress={() => signOut()}>
+          <TouchableOpacity onPress={() => router.replace("/(auth)/profileSetup")}>
             <Ionicons name="log-out-outline" size={24} color={COLORS.white} />
 
           </TouchableOpacity>

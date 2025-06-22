@@ -10,7 +10,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView
+  SafeAreaView,
+  ScrollView
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '@/Constants/theme';
@@ -59,12 +60,13 @@ const CommentsModal: React.FC<CommentModalProps> = ({
       visible={visible}
       onRequestClose={onClose}
     >
-      <SafeAreaView style={styles.safeArea}>
+
+      <ScrollView style={styles.safeArea}>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
-        >
+          >
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.title}>Comments</Text>
@@ -103,7 +105,7 @@ const CommentsModal: React.FC<CommentModalProps> = ({
               style={styles.postButton}
               onPress={handleAddComment}
               disabled={!newComment.trim()}
-            >
+              >
               <Text style={[
                 styles.postButtonText,
                 !newComment.trim() && styles.postButtonDisabled
@@ -113,7 +115,7 @@ const CommentsModal: React.FC<CommentModalProps> = ({
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
-      </SafeAreaView>
+                </ScrollView>
     </Modal>
   );
 };
@@ -166,6 +168,8 @@ const styles = StyleSheet.create({
     marginRight: 8,
     maxHeight: 100,
     color: COLORS.white,
+    marginBottom:12,
+    
   },
   postButton: {
     padding: 8,

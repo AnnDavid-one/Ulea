@@ -116,6 +116,11 @@ export const styles = StyleSheet.create({
     // color:COLORS.signInText,
     color:LightBackground.signInText,
   },
+    signupTextContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 15
+  },
   signupText: {
     textAlign: 'center',
     color:LightBackground.signInText,
@@ -129,4 +134,23 @@ export const styles = StyleSheet.create({
     marginHorizontal:2,
     marginTop:3,
   },
+
+  loginButton2: {
+  backgroundColor: '#007AFF',
+  padding: 15,
+  borderRadius: 5,
+  alignItems: 'center',
+},
+disabledButton: {
+  opacity: 0.7,  // Visual feedback for disabled state
+},
+loadingContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: 8,  // Space between spinner and text
+},
+loginButtonText2: {
+  color: 'white',
+  fontWeight: 'bold',
+}
 });

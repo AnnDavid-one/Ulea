@@ -59,7 +59,7 @@ export default function Post({ post, onDelete }: PostProps) {
 
   const likeText = likesCount > 0 
     ? `${likesCount} like${likesCount !== 1 ? 's' : ''}` 
-    : "be the first to like";
+    : "Be the first to like";
 
   const commentText = commentsCount > 0
     ? `View all ${commentsCount} comment${commentsCount !== 1 ? 's' : ''}`
