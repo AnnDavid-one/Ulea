@@ -3,6 +3,11 @@
 # dependencies
 node_modules/
 
+node_modules/
+.expo/
+.expo-shared/
+*.log
+
 # Expo
 .expo/
 dist/
