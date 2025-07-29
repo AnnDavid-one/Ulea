@@ -14,10 +14,10 @@ import {
   ScrollView
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS } from '@/Constants/theme';
 import { Comment, CommentModalProps } from '../../Constants/comment';
 
 import CommentComponent from './Comment';
+import { useTheme } from '../hooks/useTheme';
 
 const CommentsModal: React.FC<CommentModalProps> = ({
   postId,
@@ -26,6 +26,11 @@ const CommentsModal: React.FC<CommentModalProps> = ({
   onCommentAdded,
   initialComments = []
 }) => {
+
+
+  const { COLORS } = useTheme();
+  const styles = userModalStyles();
+
   const [comments, setComments] = useState<Comment[]>(initialComments);
   const [newComment, setNewComment] = useState('');
 
@@ -120,7 +125,9 @@ const CommentsModal: React.FC<CommentModalProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const userModalStyles = () => {
+  const { COLORS } = useTheme();
+  return StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: COLORS.background2,
@@ -183,6 +190,6 @@ const styles = StyleSheet.create({
   postButtonDisabled: {
     color: COLORS.grey,
   },
-});
+});}
 
 export default CommentsModal;

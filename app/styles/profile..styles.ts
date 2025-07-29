@@ -1,9 +1,17 @@
-import { COLORS } from "@/Constants/theme";
+// import { COLORS } from "@/Constants/theme";
 import { Dimensions, StyleSheet } from "react-native";
+import { useTheme } from "../hooks/useTheme";
 
 const {width, height } = Dimensions.get("window");
 
-export const styles = StyleSheet.create({
+
+// const { COLORS } = useTheme();
+// export const styles = (COLORS: ThemeColors) => StyleSheet.create({
+export const useProfileStyles = () => {
+  const { COLORS } = useTheme();
+   
+  
+  return StyleSheet.create({
 
 
     
@@ -53,17 +61,21 @@ export const styles = StyleSheet.create({
     },  
    profileInfo : {
     padding:16,
+gap:12,
 
 
     },  
     avatarAndStats: {
 
-        flexDirection:"row",
-        alignItems:"center",
+        flexDirection:"column",
+        // alignItems:"center",
         marginBottom:16,
+        gap:40
+        // justifyContent:"center"
 
     },  
-    avatarContainer: { marginRight:32
+    avatarContainer: {
+        alignSelf:"center"
 
 
     },  
@@ -80,11 +92,15 @@ export const styles = StyleSheet.create({
     statsContainer: {
         flex:1,
         flexDirection:"row",
-        justifyContent:"space-around",
+        justifyContent:"flex-start",
+        paddingHorizontal:12,
+        gap:50,
+        // backgroundColor:COLORS.primary
 
 
     },  
-    statItem: {alignItems:"center"
+    statItem: {
+        alignItems:"center"
 
 
     },  
@@ -336,4 +352,4 @@ export const styles = StyleSheet.create({
 
 
 
-})
+}) }

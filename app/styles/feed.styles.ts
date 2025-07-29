@@ -1,9 +1,17 @@
-import { COLORS } from "@/Constants/theme"
+// import { COLORS } from "@/Constants/theme"
 import { Dimensions, Platform, StyleSheet } from "react-native"
+import { useTheme } from "../hooks/useTheme";
 
 const { width, height } = Dimensions.get("window");
+const adjustedWidth = width-3;
 
-export const styles= StyleSheet.create({
+
+
+export const userPostStyles = () => {
+  const { COLORS } = useTheme();
+   
+  
+  return StyleSheet.create({
     
 
        container: {
@@ -14,11 +22,11 @@ export const styles= StyleSheet.create({
 
 
    header: {
-    marginTop:16,
+    marginTop:5,
    display:"flex",
    flexDirection:"row",
 justifyContent:"space-between",
-paddingVertical:12,
+paddingVertical:5,
 paddingHorizontal:16,
 borderBottomWidth  :0.5,
 borderBottomColor:COLORS.surface,
@@ -84,8 +92,8 @@ fontFamily:"JetBrainsMono-Medium",
  },
 
  storyVerifyAvatarWrapper:{
-  position:"absolute",
-  zIndex:1,
+  // position:"absolute",
+  // zIndex:1,
   borderWidth:3,
   borderColor:COLORS.primary,
   // backgroundColor:COLORS.background2,
@@ -95,8 +103,7 @@ fontFamily:"JetBrainsMono-Medium",
   justifyContent:"center",
   alignItems:"center",
   borderRadius:25,
-  top:10,
-  left:3,
+  marginVertical:5,
 
 
  },
@@ -135,12 +142,8 @@ fontFamily:"JetBrainsMono-Medium",
  },
  textContainer: {
    textAlign:"center",
-   position:"absolute",
-   bottom:17,
-   right:6,
    padding:2,
    borderRadius:23,
-   backgroundColor:'rgba(0,0,0,0.5)'
    
 
  },
@@ -167,8 +170,9 @@ fontFamily:"JetBrainsMono-Medium",
 
  postHearderLeft:{
   flexDirection:"row",
-  alignItems:"center",
- },
+  // alignItems:"center",
+ 
+},
 postAvatar:{
   width:32,
   height:32,
@@ -180,15 +184,24 @@ postUsername:{
   fontWeight:"600",
   color:COLORS.white,
 },
+handleDelete:{
+  display:"none",// this will be edited later to meet up wiht the functionallity
+},
 
 postImage:{
-width: width,
+width: adjustedWidth,
 height:width,
+alignSelf:"center",
+borderBottomLeftRadius:17,
+borderBottomRightRadius:17,
+borderTopLeftRadius:17,
+borderTopRightRadius:17,
 },
 postActions:{
   flexDirection :"row",
-  justifyContent:"space-between",
+  justifyContent:"space-around",
   alignItems:"center",
+  gap:4,
   paddingHorizontal:12,
   paddingVertical:12,
 }, 
@@ -196,6 +209,9 @@ postActions:{
 postActionsLeft: {
   flexDirection:"row",
   alignItems:"center",
+
+  gap:12,
+  // marginRight:12,
 },
 postInfo: {
   paddingHorizontal:12,
@@ -205,7 +221,8 @@ likesText: {
   fontSize:14,
 fontWeight:"600",
 color:COLORS.white,
-marginBottom:6,
+
+// marginBottom:6,
 },
 
 captionContainer: {
@@ -295,15 +312,22 @@ commentUsername: {
   marginBottom:4,
 
 },
+commentWrapper:{
+
+  flexDirection:"row",
+  gap:8,
+  alignItems:"center",
+  justifyContent:"center"
+},
 
 commentTexts: {
   color:COLORS.white,
   fontSize:14,
   lineHeight:20,
+  // flexDirection:"row"
 
 },
 commentInput:{
-  flexDirection:"row",
   alignItems:"center",
   paddingHorizontal:16,
   paddingVertical:12,
@@ -338,4 +362,4 @@ centered:{
   alignItems:"center",
 },
 
-});
+});}

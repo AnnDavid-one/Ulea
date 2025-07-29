@@ -4,7 +4,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { Image } from 'expo-image'
-import { styles } from '../styles/profile..styles';
+// import { styles } from '../styles/profile..styles';
 
 type profilePost = {
     id:string,

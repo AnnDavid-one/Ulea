@@ -2,13 +2,18 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet,  } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS } from '@/Constants/theme';
 import { CommentComponentProps } from '../../Constants/comment';
 import { Image } from 'expo-image';
+import { useTheme } from '../hooks/useTheme';
+// import { useProfileStyles } from '../styles/profile..styles';
+// import { userPostStyles } from '../styles/feed.styles';
 
 
 
 const Comment: React.FC<CommentComponentProps> = ({ comment, onLikePress }) => {
+  const { COLORS } = useTheme();
+    const styles = userCommentStyles();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -42,7 +47,10 @@ const Comment: React.FC<CommentComponentProps> = ({ comment, onLikePress }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const userCommentStyles = () => {
+  const { COLORS } = useTheme();
+
+  return StyleSheet.create({
   container: {
     paddingVertical: 12,
     borderBottomWidth: 1,
@@ -86,5 +94,6 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
 });
+}
 
 export default Comment;

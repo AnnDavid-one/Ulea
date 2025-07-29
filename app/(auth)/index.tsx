@@ -1,35 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
-// import { styles } from '../../styles/signInPage';
 import { styles } from '../styles/signInPage';
-import { login } from '../../Services/authService';
-// import { login } from '../../services/authService';
-import { useAuth } from '../../Services/AuthContext';
-
+import { useAuthStore } from '@/Store/useAuthStore';
+// 
 const SignInScreen = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
-  const { currentUser } = useAuth();
+  const { SignIn, loading, error, user } = useAuthStore();
 
-  const handleSignIn = async () => {
-    if (!email || !password) {
-      Alert.alert('Error', 'Please fill all fields');
-      return;
-    }
-
-    setLoading(true);
-    const { user, error } = await login(email, password);
-    setLoading(false);
-
-    if (error) {
-      Alert.alert('Error', error);
-    } else if (user) {
-      router.replace('/(tabs)');
-    }
+   const handleSignIn = async () => {
+   await SignIn(email, password);
   };
+
+  
 
   return (
     <View style={styles.container}>

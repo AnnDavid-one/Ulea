@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { styles } from '../styles/feed.styles'
+import { userPostStyles } from '../styles/feed.styles'
 import { Link } from 'expo-router'
 import { Image } from 'expo-image'
 import { Ionicons } from '@expo/vector-icons'
-import { COLORS } from '@/Constants/theme'
+// import { COLORS } from '@/Constants/theme'
 import CommentsModal from './CommentsModal'
 // import { POSTS } from '@/Constants/mock-data.post'
 import { Router } from 'expo-router'
+import { useTheme } from '../hooks/useTheme'
 
 
 // type Post ={
@@ -38,6 +39,11 @@ type PostProps = {
 // ... (keep your existing imports)
 
 export default function Post({ post, onDelete }: PostProps) {
+
+  const { COLORS } = useTheme();
+  const styles = userPostStyles();
+
+
   const [isLiked, setIsLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const [commentsCount, setCommentsCount] = useState(2); // Initial count from mock data
@@ -59,11 +65,11 @@ export default function Post({ post, onDelete }: PostProps) {
 
   const likeText = likesCount > 0 
     ? `${likesCount} like${likesCount !== 1 ? 's' : ''}` 
-    : "Be the first to like";
+    : "0";
 
   const commentText = commentsCount > 0
-    ? `View all ${commentsCount} comment${commentsCount !== 1 ? 's' : ''}`
-    : "No comments yet";
+    ? `${commentsCount} ${commentsCount !== 1 ? 'comments' : 'comment'}`
+    : "No comments";
 
   return (
     <View style={styles.posts}>
@@ -81,6 +87,8 @@ export default function Post({ post, onDelete }: PostProps) {
             following: post.following || 0,
             noOfPost:post.noOfPost,
           }        }} asChild>
+
+            {/* USER PIC AND */}
           <TouchableOpacity style={styles.postHearderLeft}>
             <Image 
               source={post.avatar}
@@ -94,7 +102,7 @@ export default function Post({ post, onDelete }: PostProps) {
 
           </TouchableOpacity>
         </Link>
-        <TouchableOpacity onPress={()=> handleDelete()}>
+        <TouchableOpacity onPress={()=> handleDelete()} style={styles.handleDelete}>
 
           {/* Delete button */}
           <Ionicons name='trash-outline' size={20} color={COLORS.primary}/>
@@ -109,43 +117,44 @@ export default function Post({ post, onDelete }: PostProps) {
         transition={200}
         cachePolicy="memory-disk"
       />
+      {/* POST INFO */}
+      <View style={styles.postInfo}>
+        
+        {post.caption && (
+          <View style={styles.captionContainer}>
+            {/* <Text style={styles.captionUsername}>{post.authorName}</Text> */}
+            <Text style={styles.captionText}>{post.caption}</Text>
+            <Text style={styles.timeAgo}>2 hours ago</Text>
+          </View> 
+        )}
+
+        <TouchableOpacity onPress={() => setShowComments(true)}>
+        </TouchableOpacity>
+        
+      </View>
        
       {/* POST ACTIONS */}
       <View style={styles.postActions}>
         <View style={styles.postActionsLeft}>
           <TouchableOpacity onPress={handleLikes}>
             <Ionicons 
-              name={isLiked ? "heart" : "heart-outline"} 
+              name={isLiked ? "star" : "star-outline"} 
               size={24} 
-              color={isLiked ? COLORS.background : COLORS.white}
+              color={isLiked ? COLORS.primary : COLORS.white}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setShowComments(true)}>
+        <Text style={styles.likesText}>{likeText}</Text>
+          <TouchableOpacity style={styles.commentWrapper} onPress={() => setShowComments(true)}>
             <Ionicons name="chatbubble-outline" size={22} color={COLORS.white}/>
+          <Text style={styles.commentTexts}>{commentText}</Text>
+            {/* <Text style={styles.commentsText2 }>View Comments</Text> */}
           </TouchableOpacity>
         </View>
         <TouchableOpacity>
-          <Ionicons name="bookmark-outline" size={22} color={COLORS.white}/>
+          <Ionicons name="ellipsis-horizontal" size={22} color={COLORS.white}/>
         </TouchableOpacity>
       </View>
 
-      {/* POST INFO */}
-      <View style={styles.postInfo}>
-        <Text style={styles.likesText}>{likeText}</Text>
-        
-        {post.caption && (
-          <View style={styles.captionContainer}>
-            <Text style={styles.captionUsername}>{post.authorName}</Text>
-            <Text style={styles.captionText}>{post.caption}</Text>
-          </View> 
-        )}
-
-        <TouchableOpacity onPress={() => setShowComments(true)}>
-          <Text style={styles.commentTexts}>{commentText}</Text>
-        </TouchableOpacity>
-        
-        <Text style={styles.timeAgo}>2 hours ago</Text>
-      </View>
 
       {/* // Update your Post.tsx to include initial comments */}
 <CommentsModal

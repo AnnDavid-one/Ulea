@@ -1,41 +1,51 @@
-import { StackActions } from "@react-navigation/native";
-import { SplashScreen, Stack } from "expo-router";
-import {  StatusBar } from "react-native";
+import { Stack } from "expo-router";
+import { StatusBar } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { useFonts} from "expo-font"
-import { useCallback } from "react";
-import { AuthProvider } from "../Services/AuthContext";
-// SplashScreen.preventAutoHideAsync();
-
+import { useAuthStore } from "@/Store/useAuthStore";
+import { Provider } from 'react-redux';
+import { store } from './../State/store';
+import { useEffect } from 'react';
+import { router } from 'expo-router';
+import { ActivityIndicator } from 'react-native';
 
 export default function RootLayout() {
-// const [fontsLoaded] = useFonts({
+  const { user, loading, initializeAuth } = useAuthStore();
 
-//   "JetBrainsMono-Medium" : require("../assets/fonts/JetBrainsMono-Medium.ttf")
+  // Initialize auth state
+  useEffect(() => {
+    const unsubscribe = initializeAuth();
+    return unsubscribe;
+  }, []);
 
-// })
+  // Handle navigation based on auth state
+  useEffect(() => {
+    if (!loading) {
+      if (user) {
+        router.replace('/(tabs)');
+      } else {
+        router.replace('/(auth)');
+      }
+    }
+  }, [user, loading]);
 
-// const onLayoutRootView = useCallback(async () => {
-//   // if(!fontsLoaded) SplashScreen.hideAsync();
-
-// }, [fontsLoaded])
+  if (loading) {
+    return (
+      <SafeAreaProvider>
+        <SafeAreaView style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'black'}}>
+          <ActivityIndicator size="large" color="white" />
+        </SafeAreaView>
+      </SafeAreaProvider>
+    );
+  }
 
   return (
-    <AuthProvider>
-
-          <SafeAreaProvider>
-            <StatusBar backgroundColor={"black"} />
-            {/* <SafeAreaView style={{flex:1, backgroundColor:"black"}} onLayout={onLayoutRootView}> */}
-            <SafeAreaView style={{flex:1, backgroundColor:"black"}} >
-        
-          <Stack 
-            screenOptions={{headerShown:false}}
-            /> 
-            </SafeAreaView>
-          </SafeAreaProvider>
-  
-
-        </AuthProvider>
-  )
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <StatusBar backgroundColor={"black"} />
+        <SafeAreaView style={{flex:1, backgroundColor:"black"}}>
+          <Stack screenOptions={{headerShown:false}} />
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </Provider>
+  );
 }
-

@@ -4,8 +4,8 @@ export const COLORS ={
     secondary:"#2DD4BF",
     secondary2:"#ff6666",
     background:"#E8EAED",
-    background2:"#000000",
-    background3:"#000000",
+    background2:"#ffffff",
+    background3:"#ffffff",
     surface:"#1A1A1A",
     surfaceLight:"#2A2A2A",
     white:"#FFFFFF",
@@ -15,15 +15,15 @@ export const COLORS ={
     
     //AVOID SPACING THE COLORS IN THE QUOTATION MARKS
     grey: "#9CA3AF",
-    oppositeColor: "#070606",
+    oppositeColor: "#ffffff",
 } as const;
 
 
 
 export const LightBackground = {
-    background2:'linear-gradient(180deg, #d53369 0%, #daae51 100%)',
+    background2:'#ffffff',
     // background3:'linear-gradient(180deg, #d53369 0%, #daae51 100%)',
-    background3: '#fff',
+    background3: '#ffffff',
     primary:'#d63384',
     grey:'#ddd',
     primary2:"#005AAD",

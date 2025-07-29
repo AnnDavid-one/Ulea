@@ -1,18 +1,24 @@
 import { View, Text, TouchableOpacity, KeyboardAvoidingView, Platform, ActivityIndicator, ScrollView, TextInput, } from 'react-native'
 import React, { useState } from 'react'
-import { styles } from '../styles/create.styles'
+import {userCreateStyles } from '../styles/create.styles'
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS } from '@/Constants/theme';
+// import { COLORS } from '@/Constants/theme';
+import { useTheme } from '../hooks/useTheme';
+
 
 import * as ImagePicker from "expo-image-picker";// this means import everything in expo-image-picker as ImagePicker
 
 // we installed image from expo because it allows us to edit more than thhe usual react native image i.e { npx expo install expo-image}
 import { Image } from "expo-image" // these image from expo is more optimized than this below:
+import { useProfileStyles } from '../styles/profile..styles';
 // import { Image } from 'react-native';
 
 
 export default function Create() {
+
+  const { COLORS } = useTheme();
+    const styles = userCreateStyles();
  
   const router = useRouter();
   // const { user } = useUser();

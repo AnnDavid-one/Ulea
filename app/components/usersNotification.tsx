@@ -1,9 +1,11 @@
 
 import { View, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { styles } from '../styles/notification.styles'
+// import { styles } from '../styles/notification.styles'
 import { Image } from 'expo-image'
 import { LogBox } from 'react-native';
+import { userNotificationStyles } from '../styles/notification.styles';
+import { useTheme } from '../hooks/useTheme';
 LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
 
@@ -18,6 +20,9 @@ LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
 
 export default function UsersNotification( {notification} : { notification: notification}) {
+
+  const { COLORS } = useTheme();
+  const styles = userNotificationStyles();
 
   let todaysDate = new Date().toUTCString()
 

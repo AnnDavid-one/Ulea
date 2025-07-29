@@ -1,9 +1,14 @@
-import { COLORS } from "@/Constants/theme"
+// import { COLORS } from "@/Constants/theme"
 import { Dimensions, StyleSheet } from "react-native"
+import { useTheme } from "../hooks/useTheme";
 
 const { width, height } = Dimensions.get("window");
 
-export const styles= StyleSheet.create({
+export const userCreateStyles = () => {
+  const { COLORS } = useTheme();
+   
+  
+  return StyleSheet.create({
        //FOR CREATE TAB
 
        container: {
@@ -139,4 +144,4 @@ captionContainer:{
     minHeight:48,
  }
 
-}); 
+}); }

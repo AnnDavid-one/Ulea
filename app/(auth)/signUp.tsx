@@ -1,36 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { FontAwesome, AntDesign } from '@expo/vector-icons';
 import { Link, router } from 'expo-router';
 import { styles } from '../styles/signInPage';
-import { register } from '../../Services/authService';
+import { useAuthStore } from '@/Store/useAuthStore';
+
+import { Image } from 'expo-image';
+  
+  
+
 
 const SignUpScreen = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [displayName, setDisplayName] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const { register, loading, error, user } = useAuthStore();
+  
+ const handleSignUp = async () => {
+   await register(email, password, displayName);
+  };
 
-  const handleSignUp = async () => {
-    if (!email || !password || !displayName) {
-      Alert.alert('Error', 'Please fill all fields');
-      return;
-    }
-
-        setLoading(true);
-        const { user, error } = await register(email, password, displayName);
-        setLoading(false);
-
-              if (error) {
-          Alert.alert('Error', error);
-        } else if (user) {
-          router.replace('/(auth)/profileSetup');
-        }
-   };
 
   return (
     <View style={styles.container}>
       <View style={styles.card}>
+      {user?.photoURL && (
+        <Image 
+          source={{ uri: user.photoURL }} 
+          style={{ width: 100, height: 100, borderRadius: 50, marginBottom: 20 }}
+        />
+      )}
         <Text style={styles.title}>SIGN UP</Text>
 
         <View style={styles.inputWrapper}>
@@ -95,7 +94,7 @@ const SignUpScreen = () => {
           <Text style={styles.signupText}>
             Already have an account?{' '}
           </Text>
-          <Link href="/(auth)/SignIn" asChild>
+          <Link href="/(auth)">
             <TouchableOpacity>
               <Text style={styles.signupLink}>Sign in</Text>
             </TouchableOpacity>

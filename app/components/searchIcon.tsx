@@ -1,11 +1,17 @@
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { Ionicons } from '@expo/vector-icons'
-import { COLORS } from '@/Constants/theme'
-import { styles } from '../styles/feed.styles'
+// import { COLORS } from '@/Constants/theme'
+// import { styles } from '../styles/feed.styles'
+import { userPostStyles } from '../styles/feed.styles'
+import { useTheme } from '../hooks/useTheme'
 
 export default function SearchIcon() {
 
+
+  const { COLORS } = useTheme();
+  const styles = userPostStyles();
+  
       const [searchQuery, setSearchQuery] =  useState<string> ("");
   const [isSearching, setIsSearching]= useState<boolean>(false)
   

@@ -1,9 +1,14 @@
 import { COLORS } from "@/Constants/theme"
 import { Dimensions, Platform, StyleSheet } from "react-native"
+import { useTheme } from "../hooks/useTheme";
 
 const { width, height } = Dimensions.get("window");
 
-export const styles = StyleSheet.create({
+export const userNotificationStyles = () => {
+  const { COLORS } = useTheme();
+   
+  
+  return StyleSheet.create({
 
     container: {
         flex:1,
@@ -97,4 +102,4 @@ export const styles = StyleSheet.create({
         borderColor:COLORS.primary,
         borderWidth:2,
     }
-})
+}) }
